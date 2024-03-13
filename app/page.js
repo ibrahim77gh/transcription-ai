@@ -11,12 +11,13 @@ import Pricing from "@/components/Pricing";
 export default function Page() {
   return (
     <>
-      <Header/>
-      {/* <Start/> */}
+         {/* <Start/> */}
       {/* <CTA/> */}
       <Hero/>
       <Testimonials3/>
       {/* <Pricing/> */}
+
+      <Pricing/>
       <FAQ/>
       <Footer/>
     </>
