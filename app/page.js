@@ -12,11 +12,11 @@ export default function Page() {
   return (
     <>
       <Header/>
-      <Start/>
-      <CTA/>
+      {/* <Start/> */}
+      {/* <CTA/> */}
       <Hero/>
       <Testimonials3/>
-      <Pricing/>
+      {/* <Pricing/> */}
       <FAQ/>
       <Footer/>
     </>

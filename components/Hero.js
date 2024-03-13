@@ -1,7 +1,12 @@
 import Image from "next/image";
 import TestimonialsAvatars from "./TestimonialsAvatars";
 import config from "@/config";
-import building from "@/app/assets/old-building.png"
+import hero from "@/app/assets/hero-img.png"
+import image from "@/app/assets/images.jpeg"
+import image1 from "@/app/assets/images-1.jpeg"
+import image2 from "@/app/assets/images-2.jpg"
+import recording from "@/app/assets/recording.jpg"
+
 
 const Hero = () => {
   return (
@@ -23,25 +28,25 @@ const Hero = () => {
         </a>
 
         <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight md:-mb-4">
-          Ship your startup in days, not weeks
+        Transcribe audio and video into text
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
-          The NextJS boilerplate with all you need to build your SaaS, AI tool,
-          or any other web app. From idea to production in 5 minutes.
+           Transcript AI quickly and automatically transcribes your audio or video, allowing you to focus on more important tasks. When time is of the essence, get searchable, 90%+-accurate AI transcriptions in just minutes.
+          
         </p>
         <button className="btn btn-primary btn-wide">
-          Get {config.appName}
+          Get AI Transcript
         </button>
 
         <TestimonialsAvatars priority={true} />
       </div>
       <div className="lg:w-full">
         <Image
-          src={building}
+          src={recording}
           alt="Product Demo"
           className="w-full"
           priority={true}
-          width={500}
+          width={1000}
           height={500}
         />
       </div>

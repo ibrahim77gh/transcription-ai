@@ -7,22 +7,21 @@ import { useRef, useState } from "react";
 
 const faqList = [
   {
-    question: "What do I get exactly?",
-    answer: <div className="space-y-2 leading-relaxed">Loreum Ipseum</div>,
+    question: "What is Transcript AI?",
+    answer: <div className="space-y-2 leading-relaxed">With Transcript AI, you gain the power to transmute spoken words into written text with impeccable accuracy, unlocking seamless communication and documentation.</div>,
   },
   {
-    question: "Can I get a refund?",
+    question: "How accurate is Transcript AI?",
     answer: (
       <p>
-        Yes! You can request a refund within 7 days of your purchase. Reach out
-        by email.
+        Transcript AI boasts high accuracy rates, thanks to its sophisticated algorithms and machine learning capabilities. While no transcription service is perfect, Transcript AI strives for precision and continuously improves through feedback and refinement.
       </p>
     ),
   },
   {
-    question: "I have another question",
+    question: "What audio formats does Transcript AI support?",
     answer: (
-      <div className="space-y-2 leading-relaxed">Cool, contact us by email</div>
+      <div className="space-y-2 leading-relaxed">Transcript AI supports a wide range of audio formats, including MP3, WAV, AAC, and more. Whether you have recorded audio files or live streams, Transcript AI can efficiently transcribe them into text.</div>
     ),
   },
 ];

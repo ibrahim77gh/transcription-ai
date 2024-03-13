@@ -2,10 +2,10 @@ import themes from "daisyui/src/theming/themes.js";
 
 const config = {
   // REQUIRED
-  appName: "Autofraud Buster",
+  appName: "Transcript AI",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
+    "Transcript AI quickly and automatically transcribes your audio or video, allowing you to focus on more important tasks. When time is of the essence, get searchable, 90%+-accurate AI transcriptions in just minutes.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "shipfa.st",
   crisp: {

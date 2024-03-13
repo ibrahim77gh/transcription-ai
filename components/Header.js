@@ -7,7 +7,15 @@ import Image from "next/image";
 import ButtonSignin from "./ButtonSignin";
 import logo from "@/app/icon.png";
 import config from "@/config";
-import {BiHome,BiMenu,BiLogoTwitter,BiLogoFacebookCircle,BiLogoLinkedinSquare,BiLogoInstagramAlt,BiLogoYoutube } from 'react-icons/bi'
+import {
+  BiHome,
+  BiMenu,
+  BiLogoTwitter,
+  BiLogoFacebookCircle,
+  BiLogoLinkedinSquare,
+  BiLogoInstagramAlt,
+  BiLogoYoutube,
+} from "react-icons/bi";
 
 const links = [
   {
@@ -18,33 +26,33 @@ const links = [
     href: "/transcription",
     label: "App",
   },
-  {
-    href: "/#successStories",
-    label: "Success Stories",
-    sublinks: [
-      { href: "/faq/general", label: "General FAQs" },
-      { href: "/faq/payment", label: "Payment FAQs" },
-      { href: "/faq/technical", label: "Technical FAQs" },
-    ],
-  },
-  {
-    href: "/#reviews",
-    label: "Reviews",
-    sublinks: [
-      { href: "/faq/general", label: "General FAQs" },
-      { href: "/faq/payment", label: "Payment FAQs" },
-      { href: "/faq/technical", label: "Technical FAQs" },
-    ],
-  },
-  {
-    href: "/#blog",
-    label: "Blog",
-    sublinks: [
-      { href: "/faq/general", label: "General FAQs" },
-      { href: "/faq/payment", label: "Payment FAQs" },
-      { href: "/faq/technical", label: "Technical FAQs" },
-    ],
-  },
+  // {
+  //   href: "/#successStories",
+  //   label: "Success Stories",
+  //   sublinks: [
+  //     { href: "/faq/general", label: "General FAQs" },
+  //     { href: "/faq/payment", label: "Payment FAQs" },
+  //     { href: "/faq/technical", label: "Technical FAQs" },
+  //   ],
+  // },
+  // {
+  //   href: "/#reviews",
+  //   label: "Reviews",
+  //   sublinks: [
+  //     { href: "/faq/general", label: "General FAQs" },
+  //     { href: "/faq/payment", label: "Payment FAQs" },
+  //     { href: "/faq/technical", label: "Technical FAQs" },
+  //   ],
+  // },
+  // {
+  //   href: "/#blog",
+  //   label: "Blog",
+  //   sublinks: [
+  //     { href: "/faq/general", label: "General FAQs" },
+  //     { href: "/faq/payment", label: "Payment FAQs" },
+  //     { href: "/faq/technical", label: "Technical FAQs" },
+  //   ],
+  // },
   {
     href: "/#faq",
     label: "FAQ",
@@ -76,14 +84,24 @@ const cta = <ButtonSignin extraStyle="btn-primary" />;
 
 const SocialMediaLinks = () => (
   <div className="flex items-center gap-4">
-    <a href="#" className="text-white hover:text-indigo-700"><BiLogoFacebookCircle /></a>
-    <a href="#" className="text-white hover:text-indigo-700"><BiLogoTwitter /></a>
-    <a href="#" className="text-white hover:text-indigo-700"><BiLogoInstagramAlt /></a>
-    <a href="#" className="text-white hover:text-indigo-700"><BiLogoYoutube /></a>
-    <a href="#" className="text-white hover:text-indigo-700"><BiLogoLinkedinSquare /></a>
+    <a href="#" className="text-white hover:text-indigo-700">
+      <BiLogoFacebookCircle />
+    </a>
+    <a href="#" className="text-white hover:text-indigo-700">
+      <BiLogoTwitter />
+    </a>
+    <a href="#" className="text-white hover:text-indigo-700">
+      <BiLogoInstagramAlt />
+    </a>
+    <a href="#" className="text-white hover:text-indigo-700">
+      <BiLogoYoutube />
+    </a>
+    <a href="#" className="text-white hover:text-indigo-700">
+      <BiLogoLinkedinSquare />
+    </a>
   </div>
 );
-const Header = () => {
+const Header = ({ isDark }) => {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
@@ -94,11 +112,10 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-
     <header className="bg-black-200">
-    <main className="flex items-center bg-black p-3 text-white md:justify-center sm:justify-center">
+      <main className="flex items-center bg-black p-3 text-white md:justify-center sm:justify-center">
         <div className="container flex justify-end items-center md:justify-center sm:justify-center">
-          <SocialMediaLinks />
+          {/* <SocialMediaLinks /> */}
         </div>
       </main>
 
@@ -153,8 +170,14 @@ const Header = () => {
               {link.sublinks ? (
                 <div className="relative group">
                   <button
-                    className={`link link-hover ${selectedLink === link.href ? 'text-primary' : ''}`}
-                    onClick={() => setSelectedLink(selectedLink === link.href ? null : link.href)}
+                    className={`link link-hover ${
+                      selectedLink === link.href ? "text-primary" : ""
+                    }`}
+                    onClick={() =>
+                      setSelectedLink(
+                        selectedLink === link.href ? null : link.href
+                      )
+                    }
                   >
                     {link.label}
                   </button>
@@ -174,7 +197,11 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <Link href={link.href} className="link link-hover" title={link.label}>
+                <Link
+                  href={link.href}
+                  className="link link-hover"
+                  title={link.label}
+                >
                   {link.label}
                 </Link>
               )}
@@ -233,11 +260,21 @@ const Header = () => {
                   <div key={link.href} className="group relative">
                     {link.sublinks ? (
                       <div
-                        className={`relative group ${selectedLink === link.href ? 'group-hover:underline text-primary' : ''}`}
+                        className={`relative group ${
+                          selectedLink === link.href
+                            ? "group-hover:underline text-primary"
+                            : ""
+                        }`}
                       >
                         <button
-                          className={`link link-hover ${selectedLink === link.href ? 'text-primary' : ''}`}
-                          onClick={() => setSelectedLink(selectedLink === link.href ? null : link.href)}
+                          className={`link link-hover ${
+                            selectedLink === link.href ? "text-primary" : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedLink(
+                              selectedLink === link.href ? null : link.href
+                            )
+                          }
                         >
                           {link.label}
                         </button>
@@ -257,10 +294,13 @@ const Header = () => {
                         )}
                       </div>
                     ) : (
-                      <Link href={link.href} className="link link-hover" title={link.label}>
+                      <Link
+                        href={link.href}
+                        className="link link-hover"
+                        title={link.label}
+                      >
                         {link.label}
                       </Link>
-                      
                     )}
                   </div>
                 ))}

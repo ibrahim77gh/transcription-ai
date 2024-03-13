@@ -1,32 +1,73 @@
 import Image from "next/image";
 import config from "@/config";
+import cloud from "@/app/assets/cloud.svg"
+import exportSVG from "@/app/assets/export.svg"
+import multi from "@/app/assets/multi.svg"
+import pixel from "@/app/assets/pixel.svg"
+import punctuation from "@/app/assets/punctuation.svg"
+import search from "@/app/assets/search.svg"
+import speaker from "@/app/assets/speaker.svg"
+import speech from "@/app/assets/speech.svg"
+
+
+
 
 // The list of your testimonials. It needs 3 items to fill the row.
 const list = [
   {
-    // Optional, use for social media like Twitter. Does not link anywhere but cool to display
-    username: "marclou",
     // REQUIRED
-    name: "Marc Lou",
+    name: "DOMAIN-SPECIFIC MODELS",
     // REQUIRED
-    text: "Really easy to use. The tutorials are really useful and explains how everything works. Hope to ship my next project really fast!",
+    text: "Speech text software provides multiple domain-optimized models for increased recognition accuracy",
     // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
-    img: "https://pbs.twimg.com/profile_images/1514863683574599681/9k7PqDTA_400x400.jpg",
+    img: cloud,
   },
   {
-    username: "the_mcnaveen",
-    name: "Naveen",
-    text: "Setting up everything from the ground up is a really hard, and time consuming process. What you pay for will save your time for sure.",
+    // REQUIRED
+    name: "EXPORT TRANSCRIPT",
+    // REQUIRED
+    text: "Export audio transcription results in the format of your choice (txt, pdf, docx, etc.)",
+    // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
+    img: exportSVG,
   },
   {
-    username: "wahab",
-    name: "Wahab Shaikh",
-    text: "Easily saves 15+ hrs for me setting up trivial stuff. Now, I can directly focus on shipping features rather than hours of setting up the same technologies from scratch. Feels like a super power! :D",
+    // REQUIRED
+    name: "AUTOMATIC PUNCTUATION",
+    // REQUIRED
+    text: "Audio and video transcriptions include commas, full stops, question marks, periods, etc.",
+    // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
+    img: punctuation,
   },
 ];
+const listdiv = [
+  {
+    // REQUIRED
+    name: "AUDIO SEARCH ENGINE",
+    // REQUIRED
+    text: "Transcription service enables users to search audio data in natural language",
+    // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
+    img: search,
+  },
+  {
+    // REQUIRED
+    name: "MULTI LANGUAGE",
+    // REQUIRED
+    text: "Audio to text converter supports more than 10 languages and non-native speaker accents",
+    // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
+    img: multi,
+  },
+  {
+    // REQUIRED
+    name: "SPEECH RECOGNITION",
+    // REQUIRED
+    text: "Powerful speech-to-text technology automatically converts voice to text in seconds",
+    // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
+    img: speaker,
+  },
+]
 
 // A single testimonial, to be rendered in  a list
-const Testimonial = ({ i }) => {
+const Testimonial = ({ i , list}) => {
   const testimonial = list[i];
 
   if (!testimonial) return null;
@@ -35,6 +76,13 @@ const Testimonial = ({ i }) => {
     <li key={i}>
       <figure className="relative max-w-lg h-full p-6 md:p-10 bg-base-200 rounded-2xl max-md:text-sm flex flex-col">
         <blockquote className="relative flex-1">
+        <Image
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+                  src={list[i].img}
+                  alt={`${list[i].name}'s testimonial for ${config.appName}`}
+                  width={100}
+                  height={100}
+        />
           <p className="text-base-content/80 leading-relaxed">
             {testimonial.text}
           </p>
@@ -45,14 +93,9 @@ const Testimonial = ({ i }) => {
               <div className="font-medium text-base-content md:mb-0.5">
                 {testimonial.name}
               </div>
-              {testimonial.username && (
-                <div className="mt-0.5 text-sm text-base-content/80">
-                  @{testimonial.username}
-                </div>
-              )}
             </div>
 
-            <div className="overflow-hidden rounded-full bg-base-300 shrink-0">
+            {/* <div className="overflow-hidden rounded-full bg-base-300 shrink-0">
               {testimonial.img ? (
                 <Image
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
@@ -66,7 +109,7 @@ const Testimonial = ({ i }) => {
                   {testimonial.name.charAt(0)}
                 </span>
               )}
-            </div>
+            </div> */}
           </div>
         </figcaption>
       </figure>
@@ -81,12 +124,11 @@ const Testimonials3 = () => {
         <div className="flex flex-col text-center w-full mb-20">
           <div className="mb-8">
             <h2 className="sm:text-5xl text-4xl font-extrabold text-base-content">
-              212 makers are already shipping faster!
+                Why Transcript.AI?
             </h2>
           </div>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-base-content/80">
-            Don&apos;t take our word for it. Here&apos;s what they have to say
-            about ShipFast.
+          Set of amazing features to help you transcribe audio and video in seconds
           </p>
         </div>
 
@@ -95,7 +137,18 @@ const Testimonials3 = () => {
           className="flex flex-col items-center lg:flex-row lg:items-stretch gap-6 lg:gap-8"
         >
           {[...Array(3)].map((e, i) => (
-            <Testimonial key={i} i={i} />
+            <Testimonial key={i} i={i} list={list} />
+          ))}
+        </ul>
+        <div>
+
+        </div>
+        <ul
+          role="listdiv"
+          className="flex flex-col items-center lg:flex-row lg:items-stretch gap-6 lg:gap-8 mt-10"
+        >
+          {[...Array(3)].map((e, i) => (
+            <Testimonial key={i} i={i} list={listdiv} />
           ))}
         </ul>
       </div>

@@ -31,16 +31,16 @@ const Footer = () => {
                         </Link>
 
                         <p className="mt-3 text-sm text-base-content/80">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+                        Transcript AI, fluent in deciphering every word's hue, transforms audio into text with precision anew
                         </p>
                     </div>
                     <div className="flex-grow flex flex-wrap justify-center -mb-10 md:mt-0 mt-10 text-center">
                         <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-                            <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
+                            {/* <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
                                 Auto Fraud
-                            </div>
+                            </div> */}
 
-                            <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
+                            {/* <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
                                 <Link href="/#newyork-auto-fraud-support" className="link link-hover">
                                     NewYork Support
                                 </Link>
@@ -50,15 +50,15 @@ const Footer = () => {
                                 <Link href="/#auto-fraud-laywers" className="link link-hover">
                                     ABC Fraud Lawyers
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-                            <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
+                            {/* <div className="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
                                 Others
-                            </div>
+                            </div> */}
 
-                            <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
+                            {/* <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
                                 <Link href="/#tos" className="link link-hover">
                                     Terms of services
                                 </Link>
@@ -68,7 +68,7 @@ const Footer = () => {
                                 <Link href="/#contact-us" className="link link-hover">
                                     Contact Us
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
