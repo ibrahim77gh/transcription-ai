@@ -15,8 +15,8 @@ const links = [
     label: "Home",
   },
   {
-    href: "/#practiceAreas",
-    label: "Practice Areas",
+    href: "/transcription",
+    label: "App",
   },
   {
     href: "/#successStories",
