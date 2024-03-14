@@ -52,7 +52,7 @@ const listdiv = [
     // REQUIRED
     name: "MULTI LANGUAGE",
     // REQUIRED
-    text: "Audio to text converter supports more than 10 languages and non-native speaker accents",
+    text: "Audio to text converter supports more than 90+ languages and non-native speaker accents",
     // Optional, a statically imported image (usually from your public folder—recommended) or a link to the person's avatar. Shows a fallback letter if not provided
     img: multi,
   },
@@ -124,11 +124,11 @@ const Testimonials3 = () => {
         <div className="flex flex-col text-center w-full mb-20">
           <div className="mb-8">
             <h2 className="sm:text-5xl text-4xl font-extrabold text-base-content">
-                Why Transcript.AI?
+                Why Transliterative?
             </h2>
           </div>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-base-content/80">
-          Set of amazing features to help you transcribe audio and video in seconds
+          Set of amazing features to help you transcribe audio in seconds
           </p>
         </div>
 
