@@ -19,7 +19,7 @@ const Hero = () => {
           <Image
             src={pakFlag}
             viewBox="0 0 122 37"
-            className="w-32 h-25 md:w-32 fill-base-content/80 group-hover:fill-base-content"
+            className="w-40 h-25 md:w-40 fill-base-content/80 group-hover:fill-base-content"
           />
           <Image
             src={nedLogo}

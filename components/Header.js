@@ -115,7 +115,7 @@ const Header = ({ isDark }) => {
     <header className="bg-black-200">
       <main className="flex items-center bg-black p-3 text-white md:justify-center sm:justify-center">
         <div className="container flex justify-end items-center md:justify-center sm:justify-center">
-          {/* <SocialMediaLinks /> */}
+          <SocialMediaLinks />
         </div>
       </main>
 
