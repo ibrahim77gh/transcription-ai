@@ -13,11 +13,7 @@ const ButtonSignin = ({ text = "Get started", extraStyle }) => {
   const { data: session, status } = useSession();
 
   const handleClick = () => {
-    if (status === "authenticated") {
-      router.push(config.auth.callbackUrl);
-    } else {
-      signIn(undefined, { callbackUrl: config.auth.callbackUrl });
-    }
+    router.push('/auth/sign-up')
   };
 
   return (

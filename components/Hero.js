@@ -33,7 +33,7 @@ const Hero = () => {
         Transcribe audio into text
         </h1>
         <p className="text-lg opacity-80 leading-relaxed">
-           Transliterative quickly and automatically transcribes your audio, allowing you to focus on more important tasks. When time is of the essence, get searchable, 90%+-accurate AI transcriptions in just minutes.
+           Transliterative quickly and automatically transcribes your audio, allowing you to focus on more important tasks. When time is of the essence, get searchable, 90% accurate AI transcriptions in just minutes.
           
         </p>
         <button className="btn btn-primary btn-wide">
