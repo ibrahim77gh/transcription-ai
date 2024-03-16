@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import ButtonSignin from "./ButtonSignin";
+import { Button } from "antd";
+// import ButtonSignin from "./ButtonSignin";
 import logo from "@/app/icon.png";
 import config from "@/config";
 import {
@@ -16,6 +17,7 @@ import {
   BiLogoInstagramAlt,
   BiLogoYoutube,
 } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 const links = [
   {
@@ -80,7 +82,7 @@ const links = [
   },
 ];
 
-const cta = <ButtonSignin extraStyle="btn-primary" />;
+// const cta = <Button/>;
 
 const SocialMediaLinks = () => (
   <div className="flex items-center gap-4">
@@ -105,6 +107,7 @@ const Header = ({ isDark }) => {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
+  const router = useRouter()
 
   useEffect(() => {
     setIsOpen(false);
@@ -208,7 +211,9 @@ const Header = ({ isDark }) => {
             </div>
           ))}
         </div>
-        <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div>
+        <div className="hidden lg:flex lg:justify-end lg:flex-1">
+          <button onClick={() => {router.push('/auth/sign-up')}}>Get Started</button>
+        </div>
       </nav>
       <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
         <div
@@ -307,7 +312,7 @@ const Header = ({ isDark }) => {
               </div>
             </div>
             <div className="divider"></div>
-            <div className="flex flex-col">{cta}</div>
+            {/* <div className="flex flex-col"><button onClick={router.push('/auth/sign-up')}>Get Started</button></div> */}
           </div>
         </div>
       </div>
