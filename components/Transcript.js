@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { BookLoader } from "react-awesome-loaders";
 import Spinner from './Spinner';
 import { AudioRecorder } from 'react-audio-voice-recorder';
-import AudioPlayer from 'react-h5-audio-player';
+import 
+AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import {
   DesktopOutlined,
@@ -15,10 +16,13 @@ import {
 
 import { UploadOutlined, AlertOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
+import axios from 'axios';
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AntCard from './AntCard';
 import Uploader from './Uploder';
+import {useRetrieveUserQuery} from '@/redux/features/authApiSlice'
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -65,21 +69,53 @@ const props = {
   },
 };
 
+
 const Transcript = () => {
+
+  // interface TranscriptProps {
+  //   text: string;
+  //   user: number;
+  // }
+  const { data: user, isLoading, isFetching } = useRetrieveUserQuery();
   const [loading, setLoading] = useState(false)
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const [transcriptions, setTranscriptions] = useState([]);
+
+  useEffect(() => {
+    // Fetch transcriptions from the API
+    axios.get('http://localhost:8000/transcription/')
+      .then(response => {
+        setTranscriptions(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching transcriptions:', error);
+      });
+  }, []);
+
   return (
     <Layout
       style={{
         minHeight: '100vh',
       }}
     >
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider 
+        collapsible 
+        collapsed={collapsed} 
+        onCollapse={setCollapsed}
+        width={300} // Adjust the width as per your requirement
+        style={{ overflow: 'auto', height: '100vh' }}
+      >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          {transcriptions.map((transcription, index) => (
+            <div key={index} className="border-b p-4">
+              <p className="font-urdu text-lg">{transcription.text}</p>
+            </div>
+          ))}
+        </Menu>
       </Sider>
       <Layout>
         <Header
@@ -99,7 +135,7 @@ const Transcript = () => {
             }}
           >
             <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>{user?.first_name} {user?.last_name}</Breadcrumb.Item>
           </Breadcrumb>
 
 
@@ -117,12 +153,14 @@ const Transcript = () => {
             <span style={{ textAlign: 'center' }}>
               <Uploader />
             </span>
-            <span style={{ textAlign: 'center', marginTop: '25px', width: '500px' }}><AudioPlayer
+            <span style={{ textAlign: 'center', marginTop: '25px', width: '500px' }}>
+              <AudioPlayer
               autoPlay
-              src="https://cdn.pixabay.com/audio/2022/08/04/audio_2dde668d05.mp3"
+              // src="https://cdn.pixabay.com/audio/2022/08/04/audio_2dde668d05.mp3"
               onPlay={e => console.log("onPlay")}
-            // other props here
-            /></span>
+              // other props here
+              />
+            </span>
             <span style={{
               display: 'flex',
               flexDirection: 'column',
