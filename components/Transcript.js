@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Spinner from './Spinner';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import AudioPlayer from './customAudioPlayer'; // Import your custom audio player component
+import { useRetrieveUserQuery } from '@/redux/features/authApiSlice'
 
 import 'react-h5-audio-player/lib/styles.css';
 import {
@@ -16,11 +17,13 @@ import {
 const { TextArea } = Input;
 
 import { UploadOutlined, AlertOutlined } from '@ant-design/icons';
-import { Button, message, Upload,Input  } from 'antd';
+import { Button, message, Upload, Input } from 'antd';
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AntCard from './AntCard';
 import FileUpload from './Uploder';
+import axios from 'axios';
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -74,11 +77,13 @@ const Transcript = () => {
   const [audioFile, setAudioFile] = useState(null);
   const [transcribedText, setTranscribedText] = useState('');
 
+  const { data: user, isLoading, isFetching } = useRetrieveUserQuery();
+
   const handleFileUpload = (file) => {
     setLoading(true); // Set loading state to true when file upload begins
     setAudioFile(file);
     message.success(`${file.name} file uploaded successfully`);
-    
+
     // Sending the audio file to the server
     const formData = new FormData();
     formData.append('audio', file);
@@ -130,20 +135,21 @@ const Transcript = () => {
         minHeight: '100vh',
       }}
     >
-      <Sider 
-        collapsible 
-        collapsed={collapsed} 
+      <Sider
+        collapsible
+        collapsed={collapsed}
         onCollapse={setCollapsed}
         width={300} // Adjust the width as per your requirement
         style={{ overflow: 'auto', height: '100vh' }}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
           {transcriptions.map((transcription, index) => (
             <div key={index} className="border-b p-4">
               <p className="font-urdu text-lg">{transcription.text}</p>
             </div>
           ))}
+          <div className="h-20" />
         </Menu>
       </Sider>
       <Layout>
@@ -164,7 +170,13 @@ const Transcript = () => {
             }}
           >
             <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>{user?.first_name} {user?.last_name}</Breadcrumb.Item>
+            <Breadcrumb>
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <Breadcrumb.Item>{user?.first_name} {user?.last_name}</Breadcrumb.Item>
+              )}
+            </Breadcrumb>
           </Breadcrumb>
 
 
@@ -179,7 +191,7 @@ const Transcript = () => {
             marginTop: '80px'
 
           }}>
-                      <span style={{ textAlign: 'center' }}>
+            <span style={{ textAlign: 'center' }}>
               <FileUpload onFileUpload={handleFileUpload} />
             </span>
             {loading ? ( // Show spinner if loading state is true
@@ -192,10 +204,10 @@ const Transcript = () => {
                   </span>
                 )}
                 {transcribedText && (
-                  <TextArea className= "font-urdu text-lg"
+                  <TextArea className="font-urdu text-lg"
                     value={transcribedText}
                     autoSize={{ minRows: 3, maxRows: 6 }}
-                    style={{ marginTop: '25px', width: '500px',  }}
+                    style={{ marginTop: '25px', width: '500px', }}
                     readOnly
                   />
                 )}
