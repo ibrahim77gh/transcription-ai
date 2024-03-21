@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 // import { BookLoader } from "react-awesome-loaders";
 import Spinner from './Spinner';
 import { AudioRecorder } from 'react-audio-voice-recorder';
-import AudioPlayer from 'react-h5-audio-player';
+import AudioPlayer from './customAudioPlayer'; // Import your custom audio player component
+
 import 'react-h5-audio-player/lib/styles.css';
 import {
   DesktopOutlined,
@@ -12,13 +13,14 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+const { TextArea } = Input;
 
 import { UploadOutlined, AlertOutlined } from '@ant-design/icons';
-import { Button, message, Upload } from 'antd';
+import { Button, message, Upload,Input  } from 'antd';
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AntCard from './AntCard';
-import Uploader from './Uploder';
+import FileUpload from './Uploder';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -66,8 +68,45 @@ const props = {
 };
 
 const Transcript = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [audioFile, setAudioFile] = useState(null);
+  const [transcribedText, setTranscribedText] = useState('');
+
+  const handleFileUpload = (file) => {
+    setLoading(true); // Set loading state to true when file upload begins
+    setAudioFile(file);
+    message.success(`${file.name} file uploaded successfully`);
+    
+    // Sending the audio file to the server
+    const formData = new FormData();
+    formData.append('audio', file);
+
+    fetch('http://127.0.0.1:8000/transcription/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to upload file to the server.');
+        }
+      })
+      .then(data => {
+        setTranscribedText(data.text);
+        setLoading(false); // Set loading state to false after receiving the response
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+        setLoading(false); // Set loading state to false if there's an error
+      });
+  };
+
+  const handleRemoveFile = () => {
+    setAudioFile(null);
+    setTranscribedText('');
+  };
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -114,44 +153,35 @@ const Transcript = () => {
             marginTop: '80px'
 
           }}>
-            <span style={{ textAlign: 'center' }}>
-              <Uploader />
+                      <span style={{ textAlign: 'center' }}>
+              <FileUpload onFileUpload={handleFileUpload} />
             </span>
-            <span style={{ textAlign: 'center', marginTop: '25px', width: '500px' }}><AudioPlayer
-              autoPlay
-              src="https://cdn.pixabay.com/audio/2022/08/04/audio_2dde668d05.mp3"
-              onPlay={e => console.log("onPlay")}
-            // other props here
-            /></span>
-            <span style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center', border: '1px solid black', backgroundColor: 'white', padding: '10px', textAlign: 'center', marginTop: '25px', width: '500px'
-            }}>
-              <div>
-                Start recording
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <AudioRecorder
-                  onRecordingComplete={addAudioElement}
-                  audioTrackConstraints={{
-                    noiseSuppression: true,
-                    echoCancellation: true,
-                  }}
-                  downloadOnSavePress={true}
-                  downloadFileExtension="webm"
-                  showVisualizer={true}
-                />
-              </div>
-            </span>
+            {loading ? ( // Show spinner if loading state is true
+              <Spinner />
+            ) : (
+              <>
+                {audioFile && (
+                  <span style={{ textAlign: 'center', marginTop: '25px', width: '500px' }}>
+                    <AudioPlayer audioFile={audioFile} />
+                  </span>
+                )}
+                {transcribedText && (
+                  <TextArea className= "font-urdu text-lg"
+                    value={transcribedText}
+                    autoSize={{ minRows: 3, maxRows: 6 }}
+                    style={{ marginTop: '25px', width: '500px',  }}
+                    readOnly
+                  />
+                )}
+              </>
+            )}
+            {/* <span>{loading ? <Spinner/> : <AntCard />}</span> */}
 
-            <span>{loading ? <Spinner/> : <AntCard />}</span>
-            <span><Button icon={<AlertOutlined />}
+            {/* <span><Button icon={<AlertOutlined />}
               style={{ textAlign: 'right', marginTop: "45px" }} onClick={() => setLoading(!loading)}> Generate Transcript</Button></span>
             <span>
 
-            </span>
+            </span> */}
           </div>
 
           {/* <div
@@ -174,7 +204,6 @@ const Transcript = () => {
             textAlign: 'center',
           }}
         >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
     </Layout>
